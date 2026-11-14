@@ -1,0 +1,23 @@
+{
+  "name": "ryg-proyectos",
+  "version": "1.0.0",
+  "description": "R&G Proyectos e Ingeniería - Website with Vercel Analytics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clementandresito-cloud/R-G.github.io.git"
+  },
+  "keywords": ["vercel", "analytics", "static-site"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clementandresito-cloud/R-G.github.io/issues"
+  },
+  "homepage": "https://github.com/clementandresito-cloud/R-G.github.io#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
