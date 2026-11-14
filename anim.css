@@ -1,0 +1,63 @@
+/* =========================================================
+   R&G — Capa de animaciones
+   Se carga después de styles.css. Si se quitan este archivo y anim.js,
+   la web vuelve a ser exactamente la de antes.
+   ========================================================= */
+@property --spark{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* Scroll suave (Lenis): el desplazamiento lo maneja Lenis, no el CSS */
+html.lenis,html.lenis body{height:auto}
+html.lenis{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* Proceso que se energiza con el scroll ---------------------------- */
+.steps.rg-live .line-fill{transition:none}
+.steps.rg-live .step-dot{border-color:rgba(255,255,255,.18)}
+.process.light .steps.rg-live .step-dot{border-color:var(--border)}
+.steps.rg-live .step.lit .step-dot{border-color:var(--yellow);box-shadow:0 0 0 6px rgba(254,201,1,.14),0 0 26px rgba(254,201,1,.45);animation:rgFlash .7s ease-out 1}
+.steps.rg-live .step.lit small{text-shadow:0 0 12px rgba(254,201,1,.7)}
+.steps .line-fill::after{content:"";position:absolute;right:-4px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#FFF6CC;box-shadow:0 0 14px 4px rgba(254,201,1,.9);opacity:0;transition:opacity .3s}
+.steps.rg-live.flowing .line-fill::after{opacity:1}
+@keyframes rgFlash{0%{box-shadow:0 0 0 0 rgba(254,201,1,.9),0 0 40px rgba(254,201,1,.9)}100%{box-shadow:0 0 0 6px rgba(254,201,1,.14),0 0 26px rgba(254,201,1,.45)}}
+
+/* Contadores tipo display de tablero ------------------------------- */
+.stat b [data-count]{font-variant-numeric:tabular-nums}
+.stat b.rg-done [data-count]{animation:rgFlicker .9s steps(1) 1;text-shadow:0 0 18px rgba(127,216,255,.35)}
+@keyframes rgFlicker{0%{opacity:1}12%{opacity:.25}20%{opacity:1}34%{opacity:.4}42%{opacity:1}100%{opacity:1}}
+
+/* Chispa en botones amarillos -------------------------------------- */
+.btn-yellow{position:relative;isolation:isolate}
+.btn-yellow::before{content:"";position:absolute;inset:-3px;border-radius:inherit;padding:3px;background:conic-gradient(from var(--spark),transparent 0 62%,rgba(255,255,255,0) 66%,#fff 78%,#FFE68A 82%,transparent 90%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;transition:opacity .3s;pointer-events:none}
+.btn-yellow:hover::before,.btn-yellow:focus-visible::before{opacity:1;animation:rgSpin 1.4s linear infinite}
+.btn-yellow:hover{box-shadow:0 0 0 1px rgba(254,201,1,.4),0 12px 34px -8px rgba(254,201,1,.75)}
+@keyframes rgSpin{to{--spark:360deg}}
+
+/* Tarjetas 3D en sectores ------------------------------------------ */
+.sector-grid{perspective:1200px}
+.sector.rg-tilt{transform-style:preserve-3d;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.sector.rg-tilt.tilting{transition:transform .12s linear,box-shadow .3s}
+.sector .rg-glare{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(520px circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.18),transparent 45%)}
+.sector:hover .rg-glare{opacity:1}
+.sector.tilting{box-shadow:0 40px 70px -30px rgba(0,0,0,.55)}
+
+/* Servicios con borde de corriente --------------------------------- */
+.svc::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;z-index:3;background:conic-gradient(from var(--spark),transparent 0 70%,var(--blue) 80%,#7FD8FF 86%,var(--yellow) 90%,transparent 96%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;transition:opacity .35s;pointer-events:none}
+.svc:hover::after,.svc:focus-visible::after{opacity:1;animation:rgSpin 2.2s linear infinite}
+
+/* Botones magnéticos (usa "translate" para no pisar los efectos existentes) */
+.rg-mag{transition:translate .45s cubic-bezier(.2,.8,.2,1),transform .3s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s}
+.rg-mag.pulling{transition:translate .12s linear,transform .3s var(--ease),background .3s,color .3s,border-color .3s,box-shadow .3s}
+
+/* Cursor personalizado (solo con mouse) ---------------------------- */
+.rg-cursor{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid rgba(13,82,186,.55);transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s,border-color .3s,opacity .3s;opacity:0}
+.rg-cursor.show{opacity:1}
+.rg-cursor.hover{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(254,201,1,.14);border-color:rgba(254,201,1,.9)}
+.rg-cursor.dark{border-color:rgba(255,255,255,.6)}
+.rg-dot{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--yellow);box-shadow:0 0 8px rgba(254,201,1,.9);opacity:0;transition:opacity .3s}
+.rg-dot.show{opacity:1}
+
+/* Accesibilidad: sin movimiento si el sistema lo pide */
+@media (prefers-reduced-motion:reduce){
+  .rg-cursor,.rg-dot{display:none}
+  .btn-yellow:hover::before,.svc:hover::after{animation:none}
+}
