@@ -75,15 +75,15 @@ COOKIES
   Google en Contacto, que solo se carga si el visitante pulsa "Cargar mapa".
 
 PENDIENTES ANTES DE PUBLICAR
-- Dominio: por ahora el sitio usa https://ryg-proyectos.vercel.app en los enlaces
+- Dominio: por ahora el sitio usa https://ryg-proyectosvercelapp.vercel.app en los enlaces
   canónicos, en la vista previa para redes (og:), en los datos para Google
   (index.html) y en sitemap.xml / robots.txt. Cuando rgproyectos.com apunte a la
-  web, reemplaza "https://ryg-proyectos.vercel.app" por "https://rgproyectos.com"
+  web, reemplaza "https://ryg-proyectosvercelapp.vercel.app" por "https://rgproyectos.com"
   en todos esos archivos.
 - Textos legales: son una base redactada según la Ley 29733 y su Reglamento
   (D.S. 016-2024-JUS). Pide a un abogado que los revise antes de publicar.
 - Después de publicar: registra el sitio en Google Search Console y envía
-  https://ryg-proyectos.vercel.app/sitemap.xml
+  https://ryg-proyectosvercelapp.vercel.app/sitemap.xml
 - Testimonios (index.html, sección "Testimonios"): cada tarjeta tiene un texto de
   relleno. Reemplaza "Aquí va el testimonio real de…", "Nombre y apellido" y "Cargo"
   por lo que te diga cada cliente, con su autorización. Si un cliente no da
