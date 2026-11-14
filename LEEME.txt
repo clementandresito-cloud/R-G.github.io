@@ -61,13 +61,14 @@ TIPOGRAFÍAS
                                    SIL Open Font License, incluida). Así el sitio no
                                    se conecta a Google Fonts y no hace falta aviso.
 
-FORMULARIO DE CONTACTO (envío real con Formspree)
-  1. Crea una cuenta gratis en https://formspree.io con administracion@rgproyectos.com
-  2. New Form -> copia la dirección, por ejemplo https://formspree.io/f/xabcdwxy
-  3. Abre app.js y pégala en la línea:  const FORM_ENDPOINT = '';
-     Queda así:                         const FORM_ENDPOINT = 'https://formspree.io/f/xabcdwxy';
-  Con eso el botón dice "Enviar solicitud" y los mensajes llegan a tu correo.
-  Mientras esté vacía, el formulario sigue abriendo WhatsApp o el correo del visitante.
+FORMULARIO DE CONTACTO (envío real con FormSubmit, sin cuenta)
+  Los mensajes llegan a administracion@rgproyectos.com a través de formsubmit.co.
+  ACTIVACIÓN (una sola vez): envía una solicitud de prueba desde la web. Llegará un
+  correo de FormSubmit a administracion@rgproyectos.com: pulsa "Activate Form".
+  Desde ese momento todas las solicitudes llegan a ese correo.
+  Para cambiar el correo de destino: en app.js, línea FORM_ENDPOINT, cambia la dirección
+  después de /ajax/ (y vuelve a activar). Si la dejas vacía (''), el formulario abre
+  WhatsApp o el correo del visitante, como antes.
 
 COOKIES
   No hay aviso emergente: el sitio no usa cookies de terceros salvo el mapa de
@@ -87,8 +88,8 @@ PENDIENTES ANTES DE PUBLICAR
   por lo que te diga cada cliente, con su autorización. Si un cliente no da
   testimonio, borra su tarjeta completa (<article class="tcard">…</article>).
 - Uso de logos de clientes: confirma que tienes permiso para mostrarlos.
-- Formulario: pega la dirección de Formspree en app.js (ver arriba). La política de
-  privacidad ya menciona Formspree como servicio de envío.
+- Formulario: activa FormSubmit con el primer envío de prueba (ver arriba). La política
+  de privacidad ya menciona FormSubmit como servicio de envío.
 - Fotos de servicios: assets/servicios/ (Pexels, uso comercial libre). Las usan
   servicios.html y las tarjetas de servicios de index.html.
 - Fotos de sectores: assets/sectores/ (Pexels, uso comercial libre).

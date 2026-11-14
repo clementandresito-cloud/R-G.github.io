@@ -7,9 +7,10 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const WHATSAPP = '51997848742';
   const MAIL = 'administracion@rgproyectos.com';
-  /* Formulario: pega aquí la dirección de tu formulario de Formspree (https://formspree.io/f/xxxxxxxx).
-     Mientras esté vacía, el formulario abre WhatsApp como antes. */
-  const FORM_ENDPOINT = '';
+  /* Formulario: los mensajes se envían con FormSubmit (formsubmit.co) a administracion@rgproyectos.com.
+     La primera vez llega un correo de activación a esa casilla: hay que pulsar el enlace una sola vez.
+     Si se deja vacío (''), el formulario vuelve a abrir WhatsApp. */
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/administracion@rgproyectos.com';
   /* ---------- Pantalla de carga con el logo ---------- */
   const pl = $('.preloader');
   if (pl) {
@@ -298,11 +299,14 @@ ${f.get('mensaje')}`;
       const data = new FormData(form);
       data.delete('acepto');
       data.append('_subject', `Solicitud de cotización web - ${data.get('servicio')}`);
+      data.append('_template', 'table');
+      data.append('_honey', '');
       submitBtn.disabled = true;
       say('Enviando tu solicitud…');
       try {
         const r = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-        if (!r.ok) throw new Error(r.status);
+        const res = await r.json().catch(() => ({}));
+        if (!r.ok || res.success === false || res.success === 'false') throw new Error(res.message || r.status);
         form.reset();
         say('¡Gracias! Recibimos tu solicitud y te responderemos a la brevedad.', 'ok');
       } catch (err) {
