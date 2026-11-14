@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnpm/
+
+# Lock files - keeping package-lock.json in git for this project
+# node_modules is excluded but package-lock.json helps ensure consistent installs
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Cache
+.cache/
+.vercel/
+.parcel-cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
