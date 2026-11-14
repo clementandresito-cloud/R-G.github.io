@@ -1,0 +1,65 @@
+R&G PROYECTOS E INGENIERÍA — SITIO WEB
+=======================================
+
+Abre index.html en el navegador para ver el sitio. Para publicarlo, sube TODO el
+contenido de esta carpeta a tu hosting (respetando las carpetas).
+
+PÁGINAS
+- index.html ...... Inicio (portada a pantalla completa, quiénes somos, servicios,
+                    sectores, clientes y testimonios)
+- nosotros.html ... Empresa, misión, visión, valores y por qué elegirnos
+- servicios.html .. Catálogo interactivo de los 11 servicios y proceso de trabajo
+- proyectos.html .. Galería con filtros; cada proyecto abre su álbum de fotos
+- contacto.html ... Datos, formulario que abre WhatsApp, mapa y preguntas frecuentes
+- aviso-legal.html, privacidad.html, cookies.html ... Páginas legales
+- 404.html ........ Página para direcciones que no existen
+- sitemap.xml, robots.txt ... Para que Google encuentre todas las páginas
+- .htaccess ....... Fuerza HTTPS y activa la página 404 (hosting Apache/cPanel).
+                    Es un archivo oculto: súbelo también a la raíz del hosting.
+- favicon.ico y assets/favicon-*.png, assets/apple-touch-icon.png ... Íconos
+- styles.css ...... Todos los estilos (los colores están al inicio, en :root)
+- app.js .......... Todas las interacciones
+
+CÓMO CAMBIAR LAS FOTOS (por tus fotos en 4K)
+Reemplaza el archivo manteniendo EXACTAMENTE el mismo nombre. No hace falta tocar código.
+Recomendado: exportar en JPG, calidad 80 %, máximo 2560 px de ancho (pesan menos y
+se ven nítidas incluso en pantallas 4K).
+
+  assets/img/hero.jpg ............ Portada principal (horizontal, 2560 × 1440)
+  assets/img/tecnico.jpg ......... Nosotros / sección "Quiénes somos"
+  assets/img/hmi.jpg ............. Servicio 01 y portada de Servicios
+  assets/img/ingenieria.jpg ...... Servicio 02 y portada de Contacto
+
+  assets/proyectos/NOMBRE-1.jpg .. Foto principal de cada proyecto
+  assets/proyectos/NOMBRE-2.jpg …  Fotos adicionales del álbum
+
+  Proyectos: tableros-antiexp, subestacion, ilum-antiexp-montaje, sensores,
+             pozo-tierra, luminarias, ilum-antiexp-mant
+
+  Si un proyecto tiene más fotos, agrégalas (ej. sensores-4.jpg) y súmalas en el
+  atributo data-photos de su tarjeta en proyectos.html e index.html.
+
+LOGOS
+  assets/logo-rg.png ............. Logo a color (barra blanca al bajar)
+  assets/logo-rg-blanco.png ...... Logo blanco (portada y footer)
+  assets/clientes/ ............... Logos de clientes del carrusel
+
+PENDIENTES ANTES DE PUBLICAR
+- Dominio: el sitio usa https://rgproyectos.com en los enlaces canónicos, en los
+  datos para Google (index.html) y en sitemap.xml / robots.txt. Si tu dominio es
+  otro (por ejemplo con www), reemplaza "https://rgproyectos.com" en todos los
+  archivos.
+- Textos legales: son una base redactada según la Ley 29733 y su Reglamento
+  (D.S. 016-2024-JUS). Pide a un abogado que los revise antes de publicar.
+- Después de publicar: registra el sitio en Google Search Console y envía
+  https://rgproyectos.com/sitemap.xml
+- Testimonios (index.html, sección "Testimonios"): cada tarjeta tiene un texto de
+  relleno. Reemplaza "Aquí va el testimonio real de…", "Nombre y apellido" y "Cargo"
+  por lo que te diga cada cliente, con su autorización. Si un cliente no da
+  testimonio, borra su tarjeta completa (<article class="tcard">…</article>).
+- Uso de logos de clientes: confirma que tienes permiso para mostrarlos.
+- El formulario abre WhatsApp (+51 997 848 742) o el programa de correo del visitante
+  (administracion@rgproyectos.com) con el mensaje listo. No envía nada por sí solo.
+- Fotos de servicios: assets/servicios/ (Pexels, uso comercial libre). Las usan
+  servicios.html y las tarjetas de servicios de index.html.
+- Fotos de sectores: assets/sectores/ (Pexels, uso comercial libre).
