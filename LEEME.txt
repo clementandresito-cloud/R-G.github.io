@@ -20,29 +20,58 @@ PÁGINAS
 - styles.css ...... Todos los estilos (los colores están al inicio, en :root)
 - app.js .......... Todas las interacciones
 
-CÓMO CAMBIAR LAS FOTOS (por tus fotos en 4K)
-Reemplaza el archivo manteniendo EXACTAMENTE el mismo nombre. No hace falta tocar código.
-Recomendado: exportar en JPG, calidad 80 %, máximo 2560 px de ancho (pesan menos y
-se ven nítidas incluso en pantallas 4K).
+CÓMO CAMBIAR LAS FOTOS
+Las fotos están en formato WebP (pesan 3-4 veces menos que JPG). Cada foto tiene
+3 versiones: NOMBRE.webp (grande, máx. 1920 px de ancho), NOMBRE-1280.webp y
+NOMBRE-640.webp (para celulares). El navegador elige la que necesita.
 
-  assets/img/hero.jpg ............ Portada principal (horizontal, 2560 × 1440)
-  assets/img/tecnico.jpg ......... Nosotros / sección "Quiénes somos"
-  assets/img/hmi.jpg ............. Servicio 01 y portada de Servicios
-  assets/img/ingenieria.jpg ...... Servicio 02 y portada de Contacto
+Para cambiar una foto:
+  1. Entra a https://squoosh.app y abre tu foto.
+  2. Elige formato WebP, calidad 75, y exporta 3 veces con estos anchos:
+     1920 px -> NOMBRE.webp   1280 px -> NOMBRE-1280.webp   640 px -> NOMBRE-640.webp
+  3. Reemplaza los 3 archivos manteniendo EXACTAMENTE los mismos nombres.
+  Si la foto nueva tiene otra proporción (no es horizontal como la anterior),
+  cambia también width="" y height="" en la etiqueta <img> correspondiente.
 
-  assets/proyectos/NOMBRE-1.jpg .. Foto principal de cada proyecto
-  assets/proyectos/NOMBRE-2.jpg …  Fotos adicionales del álbum
+  assets/img/hero.webp ........... Portada principal (horizontal)
+  assets/img/hero.jpg ............ Copia en JPG solo para la vista previa al compartir
+                                   el enlace en WhatsApp/LinkedIn (1200-1920 px)
+  assets/img/tecnico.webp ........ Nosotros / sección "Quiénes somos"
+  assets/img/hmi.webp ............ Servicio 01 y portada de Servicios
+  assets/img/ingenieria.webp ..... Servicio 02 y portada de Contacto
+
+  assets/proyectos/NOMBRE-1.webp . Foto principal de cada proyecto
+  assets/proyectos/NOMBRE-2.webp … Fotos adicionales del álbum
 
   Proyectos: tableros-antiexp, subestacion, ilum-antiexp-montaje, sensores,
              pozo-tierra, luminarias, ilum-antiexp-mant
 
-  Si un proyecto tiene más fotos, agrégalas (ej. sensores-4.jpg) y súmalas en el
-  atributo data-photos de su tarjeta en proyectos.html e index.html.
+  Si un proyecto tiene más fotos, agrégalas (ej. sensores-4.webp, con sus versiones
+  -1280 y -640) y súmalas en el atributo data-photos de su tarjeta en proyectos.html
+  e index.html.
 
 LOGOS
-  assets/logo-rg.png ............. Logo a color (barra blanca al bajar)
-  assets/logo-rg-blanco.png ...... Logo blanco (portada y footer)
-  assets/clientes/ ............... Logos de clientes del carrusel
+  assets/logo-rg.webp ............ Logo a color (barra blanca al bajar)
+  assets/logo-rg-blanco.webp ..... Logo blanco (portada y footer)
+  assets/logo-mark.webp .......... Ícono de la pantalla de carga
+  assets/clientes/ ............... Logos de clientes del carrusel (WebP)
+
+TIPOGRAFÍAS
+  assets/fonts/ .................. Inter y Sora alojadas en el propio sitio (licencia
+                                   SIL Open Font License, incluida). Así el sitio no
+                                   se conecta a Google Fonts y no hace falta aviso.
+
+FORMULARIO DE CONTACTO (envío real con Formspree)
+  1. Crea una cuenta gratis en https://formspree.io con administracion@rgproyectos.com
+  2. New Form -> copia la dirección, por ejemplo https://formspree.io/f/xabcdwxy
+  3. Abre app.js y pégala en la línea:  const FORM_ENDPOINT = '';
+     Queda así:                         const FORM_ENDPOINT = 'https://formspree.io/f/xabcdwxy';
+  Con eso el botón dice "Enviar solicitud" y los mensajes llegan a tu correo.
+  Mientras esté vacía, el formulario sigue abriendo WhatsApp o el correo del visitante.
+
+COOKIES
+  No hay aviso emergente: el sitio no usa cookies de terceros salvo el mapa de
+  Google en Contacto, que solo se carga si el visitante pulsa "Cargar mapa".
 
 PENDIENTES ANTES DE PUBLICAR
 - Dominio: el sitio usa https://rgproyectos.com en los enlaces canónicos, en los
@@ -58,8 +87,8 @@ PENDIENTES ANTES DE PUBLICAR
   por lo que te diga cada cliente, con su autorización. Si un cliente no da
   testimonio, borra su tarjeta completa (<article class="tcard">…</article>).
 - Uso de logos de clientes: confirma que tienes permiso para mostrarlos.
-- El formulario abre WhatsApp (+51 997 848 742) o el programa de correo del visitante
-  (administracion@rgproyectos.com) con el mensaje listo. No envía nada por sí solo.
+- Formulario: pega la dirección de Formspree en app.js (ver arriba). La política de
+  privacidad ya menciona Formspree como servicio de envío.
 - Fotos de servicios: assets/servicios/ (Pexels, uso comercial libre). Las usan
   servicios.html y las tarjetas de servicios de index.html.
 - Fotos de sectores: assets/sectores/ (Pexels, uso comercial libre).

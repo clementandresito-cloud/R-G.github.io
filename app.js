@@ -7,6 +7,9 @@
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const WHATSAPP = '51997848742';
   const MAIL = 'administracion@rgproyectos.com';
+  /* Formulario: pega aquí la dirección de tu formulario de Formspree (https://formspree.io/f/xxxxxxxx).
+     Mientras esté vacía, el formulario abre WhatsApp como antes. */
+  const FORM_ENDPOINT = '';
   /* ---------- Pantalla de carga con el logo ---------- */
   const pl = $('.preloader');
   if (pl) {
@@ -63,6 +66,7 @@
   const hero = $('.hero');
   const progress = $('.progress');
   const totop = $('.totop');
+  const wa = $('.wa');
   function onScroll() {
     const y = window.scrollY;
     const threshold = isHome && hero ? hero.offsetHeight * 0.55 : 40;
@@ -75,6 +79,8 @@
       progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     }
     if (totop) totop.classList.toggle('show', y > innerHeight);
+    // En celular el botón de WhatsApp aparece al bajar, para no tapar la portada
+    if (wa) wa.classList.toggle('show', y > innerHeight * 0.6);
   }
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onScroll);
@@ -230,7 +236,8 @@
       title.textContent = card.querySelector('h3').textContent;
       img.alt = title.textContent;
       sub.dataset.base = card.dataset.category || 'Trabajo realizado';
-      thumbs.innerHTML = photos.map((p, j) => `<button type="button" aria-label="Foto ${j + 1}"><img src="${p}" alt=""></button>`).join('');
+      const thumb = p => /\.webp$/.test(p) ? p.replace(/\.webp$/, '-640.webp') : p;
+      thumbs.innerHTML = photos.map((p, j) => `<button type="button" aria-label="Foto ${j + 1}"><img src="${thumb(p)}" alt="" onerror="this.onerror=null;this.src='${p}'"></button>`).join('');
       $$('button', thumbs).forEach((b, j) => b.addEventListener('click', () => { idx = j; render(); }));
       render();
       lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
@@ -277,9 +284,32 @@ Servicio: ${f.get('servicio')}
 
 ${f.get('mensaje')}`;
     };
-    form.addEventListener('submit', e => {
+    const status = $('.form-status', form);
+    const submitBtn = $('button[type=submit]', form);
+    const openWhatsApp = () => window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(buildText())}`, '_blank', 'noopener');
+    const say = (msg, kind) => { if (status) { status.textContent = msg; status.dataset.kind = kind || ''; status.hidden = !msg; } };
+    if (FORM_ENDPOINT) {
+      form.classList.add('has-endpoint');
+      $('[data-send-wa]', form)?.addEventListener('click', () => { if (form.reportValidity()) openWhatsApp(); });
+    }
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(buildText())}`, '_blank', 'noopener');
+      if (!FORM_ENDPOINT) { openWhatsApp(); return; }
+      const data = new FormData(form);
+      data.delete('acepto');
+      data.append('_subject', `Solicitud de cotización web - ${data.get('servicio')}`);
+      submitBtn.disabled = true;
+      say('Enviando tu solicitud…');
+      try {
+        const r = await fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error(r.status);
+        form.reset();
+        say('¡Gracias! Recibimos tu solicitud y te responderemos a la brevedad.', 'ok');
+      } catch (err) {
+        say(`No se pudo enviar. Escríbenos por WhatsApp al +51 997 848 742 o a ${MAIL}.`, 'error');
+      } finally {
+        submitBtn.disabled = false;
+      }
     });
     $('[data-send-mail]', form)?.addEventListener('click', () => {
       if (!form.reportValidity()) return;
@@ -288,11 +318,10 @@ ${f.get('mensaje')}`;
     });
   }
 
-  /* ---------- Aviso de cookies y mapa con consentimiento ---------- */
+  /* ---------- Mapa con consentimiento (Google Maps solo se carga si el visitante lo pide) ---------- */
   const KEY = 'rg-cookies';
   const getPref = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
   const setPref = v => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (e) {} };
-  const banner = $('.cookie-banner');
   // Dentro de otra página (vista previa) los mapas incrustados se bloquean: ahí se deja la tarjeta con el enlace.
   const framed = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
   const loadMap = () => {
@@ -304,16 +333,13 @@ ${f.get('mensaje')}`;
       <div class="map-card"><b>R&amp;G Proyectos e Ingeniería</b><span>Urb. El Rosario del Norte, Mz. R, Lt. 35 · San Martín de Porres, Lima</span><a href="${link}" target="_blank" rel="noopener">Cómo llegar ↗</a></div>`;
   };
   if (framed) $$('[data-load-map]').forEach(b => b.hidden = true);
-  const showBanner = show => { if (banner) { banner.hidden = !show; requestAnimationFrame(() => banner.classList.toggle('show', show)); } };
-  if (!getPref()) setTimeout(() => showBanner(true), 1200);
   if (getPref() === 'accept') loadMap();
-  $$('[data-cookies]').forEach(b => b.addEventListener('click', () => {
-    const v = b.dataset.cookies;
-    if (v === 'reset') { setPref(null); showBanner(true); return; }
-    setPref(v); showBanner(false);
-    if (v === 'accept') loadMap();
+  $('[data-load-map]')?.addEventListener('click', () => { setPref('accept'); loadMap(); });
+  $$('[data-cookies="reset"]').forEach(b => b.addEventListener('click', () => {
+    setPref(null);
+    const msg = b.parentElement.querySelector('.cookie-reset-msg');
+    if (msg) msg.hidden = false;
   }));
-  $('[data-load-map]')?.addEventListener('click', loadMap);
 
   /* ---------- Año del footer ---------- */
   $$('.year').forEach(y => y.textContent = new Date().getFullYear());
