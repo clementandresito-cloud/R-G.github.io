@@ -53,8 +53,14 @@ html.lenis{scroll-behavior:auto!important}
 .rg-cursor.show{opacity:1}
 .rg-cursor.hover{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(254,201,1,.14);border-color:rgba(254,201,1,.9)}
 .rg-cursor.dark{border-color:rgba(255,255,255,.6)}
-.rg-dot{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--yellow);box-shadow:0 0 8px rgba(254,201,1,.9);opacity:0;transition:opacity .3s}
+.rg-dot{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 2px rgba(255,255,255,.85);opacity:0;transition:opacity .2s,background .3s,box-shadow .3s}
 .rg-dot.show{opacity:1}
+.rg-dot.dark{background:var(--yellow);box-shadow:0 0 8px rgba(254,201,1,.9)}
+.rg-cursor.native,.rg-dot.native{opacity:0}
+/* Con el cursor propio activo se oculta la flecha del sistema,
+   salvo en campos de texto, donde se mantiene el cursor de escritura */
+html.rg-cursor-on,html.rg-cursor-on *{cursor:none!important}
+html.rg-cursor-on input,html.rg-cursor-on textarea,html.rg-cursor-on select,html.rg-cursor-on iframe{cursor:auto!important}
 
 /* Accesibilidad: sin movimiento si el sistema lo pide */
 @media (prefers-reduced-motion:reduce){

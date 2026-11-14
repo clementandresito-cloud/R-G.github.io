@@ -90,6 +90,7 @@
     ring.className = 'rg-cursor'; dot.className = 'rg-dot';
     ring.setAttribute('aria-hidden', 'true'); dot.setAttribute('aria-hidden', 'true');
     document.body.append(ring, dot);
+    document.documentElement.classList.add('rg-cursor-on');
     let mx = -100, my = -100, rx = -100, ry = -100;
     addEventListener('pointermove', e => {
       if (e.pointerType !== 'mouse') return;
@@ -98,7 +99,10 @@
       ring.classList.add('show'); dot.classList.add('show');
       const t = e.target;
       ring.classList.toggle('hover', !!t.closest('a, button, [role="button"], .svc, .proj, .sector, label, select'));
-      ring.classList.toggle('dark', !!t.closest('.hero, .pagehero, .dark, .cta, .footer, .sectors-band'));
+      const dark = !!t.closest('.hero, .pagehero, .dark, .cta, .footer, .sectors-band, .mobile-menu, .lightbox');
+      const native = !!t.closest('input, textarea, select, iframe');
+      ring.classList.toggle('dark', dark); dot.classList.toggle('dark', dark);
+      ring.classList.toggle('native', native); dot.classList.toggle('native', native);
     }, { passive: true });
     document.addEventListener('pointerleave', () => { ring.classList.remove('show'); dot.classList.remove('show'); });
     const follow = () => {
