@@ -84,10 +84,9 @@ PENDIENTES ANTES DE PUBLICAR
   (D.S. 016-2024-JUS). Pide a un abogado que los revise antes de publicar.
 - Después de publicar: registra el sitio en Google Search Console y envía
   https://ryg-proyectosvercelapp.vercel.app/sitemap.xml
-- Testimonios (index.html, sección "Testimonios"): cada tarjeta tiene un texto de
-  relleno. Reemplaza "Aquí va el testimonio real de…", "Nombre y apellido" y "Cargo"
-  por lo que te diga cada cliente, con su autorización. Si un cliente no da
-  testimonio, borra su tarjeta completa (<article class="tcard">…</article>).
+- Testimonios: la sección se quitó de index.html hasta tener testimonios reales y
+  autorizados por escrito. Los estilos siguen en styles.css (.testimonials, .tcard);
+  para volver a ponerla, recupérala del historial de GitHub y reemplaza los textos.
 - Uso de logos de clientes: confirma que tienes permiso para mostrarlos.
 - Formulario: activa FormSubmit con el primer envío de prueba (ver arriba). La política
   de privacidad ya menciona FormSubmit como servicio de envío.
