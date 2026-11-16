@@ -428,6 +428,8 @@ body.menu-open{overflow:hidden}
 
 /* Contacto */
 .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,70px);align-items:start}
+.contact-grid>*,.citem>*{min-width:0}
+.citem b,.citem a{overflow-wrap:anywhere}
 .cinfo{display:grid;gap:14px;margin:32px 0}
 .citem{display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border-radius:16px;background:var(--white);border:1px solid var(--border);transition:border-color .3s,transform .4s var(--ease)}
 a.citem:hover,.citem:hover{border-color:var(--blue);transform:translateX(4px)}
@@ -468,12 +470,12 @@ a.citem:hover,.citem:hover{border-color:var(--blue);transform:translateX(4px)}
 .fields .consent a{color:var(--blue);text-decoration:underline}
 
 /* Mapa con consentimiento */
-.map{display:grid;position:relative}
+.map{display:grid;grid-template-columns:minmax(0,1fr);position:relative}
 .map.loaded{background:radial-gradient(circle at 50% 30%,var(--white),var(--blue-light))}
 .map-card{position:absolute;left:20px;bottom:20px;max-width:min(360px,calc(100% - 40px));display:grid;gap:4px;padding:16px 18px;border-radius:14px;background:var(--white);box-shadow:var(--shadow);font-size:.88rem;color:var(--muted)}
 .map-card b{font-family:var(--font-head);color:var(--navy);font-size:.95rem}
 .map-card a{color:var(--blue);font-weight:600;margin-top:4px}
-.map-consent{display:grid;place-items:center;align-content:center;text-align:center;gap:6px;padding:40px 24px;background:radial-gradient(circle at 50% 30%,var(--white),var(--blue-light))}
+.map-consent{min-width:0;display:grid;place-items:center;align-content:center;text-align:center;gap:6px;padding:40px 24px;background:radial-gradient(circle at 50% 30%,var(--white),var(--blue-light))}
 .map-consent .map-pin{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:var(--white);box-shadow:0 0 0 12px rgba(13,82,186,.12);margin-bottom:14px}
 .map-consent .map-pin svg{width:28px;height:28px}
 .map-consent h3{margin:0;font-size:1.2rem}
@@ -502,7 +504,8 @@ a.citem:hover,.citem:hover{border-color:var(--blue);transform:translateX(4px)}
 .data-list li{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px 18px;line-height:1.5}
 .data-list li+li{border-top:1px solid var(--border)}
 .data-list span{color:var(--muted);font-size:.88rem}
-.data-list b{color:var(--navy);font-weight:600}
+.data-list b{color:var(--navy);font-weight:600;overflow-wrap:anywhere}
+.data-list li>*{min-width:0}
 .table-wrap{overflow-x:auto;margin:0 0 1.2em;border:1px solid var(--border);border-radius:14px}
 .legal table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px}
 .legal th,.legal td{text-align:left;padding:12px 16px;vertical-align:top}
